@@ -21,9 +21,10 @@ os.chdir(dir)
 print os.getcwd()
 
 bash = "git"
-para = "pull"
-option = "-p"
-url = "git@github.com:PythonObject/teris.git"
-retcode = subprocess.call([bash, para, option, url])
+active = "push"
+option = "test"
+branch = "master"
+# url = "git@github.com:PythonObject/python_base_subprocess_test_repository.git"
+retcode = subprocess.call([bash, active, option, branch])
 print retcode
 
