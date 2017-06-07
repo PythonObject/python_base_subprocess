@@ -15,16 +15,49 @@ print retcode
 print type(retcode)
 print "---------------------"
 
-# 切换路径
-dir = "/home/wmm/studydata"
-os.chdir(dir)
-print os.getcwd()
+# 写入文件
+filename = 'log.txt'
+file_object = open(filename, 'wb+')
 
 bash = "git"
 active = "push"
 option = "test"
 branch = "master"
-# url = "git@github.com:PythonObject/python_base_subprocess_test_repository.git"
-retcode = subprocess.call([bash, active, option, branch])
-print retcode
+
+# 切换路径
+dir = "/home/wmm/studydata"
+os.chdir(dir)
+print os.getcwd()
+
+active = "clone "
+para = "--bare"
+url = "git@github.com:PythonObject/python_base_subprocess_test_repository.git"
+# command = format("" + bash +' ' + '' + url)
+command = "git clone git@github.com:PythonObject/python_base_subprocess_test_repository.git"
+print command
+# subprocess.call(bash, None, para, active, url)
+result = subprocess.Popen(
+    args=command,
+    shell=True,
+    stdin=None,
+    stdout=file_object,
+    stderr=file_object,
+).wait()
+print result
+print type(result)
+
+file_object.seek(0)
+contents = file_object.read()
+file_object.close()
+print contents
+
+# 直接push到另一个remote
+# bash = "git"
+# active = "push"
+# option = "test"
+# branch = "master"
+# # url = "git@github.com:PythonObject/python_base_subprocess_test_repository.git"
+# retcode = subprocess.call([bash, active, option, branch])
+# print retcode
+
 
