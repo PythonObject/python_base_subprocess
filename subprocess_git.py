@@ -23,8 +23,9 @@ option = "test"
 branch = "master"
 
 # 切换路径
-dir = "/home/wmm/studydata"
+dir = "/home/wmm/studydata/python_base_subprocess_test_repository"
 os.chdir(dir)
+os.getcwdu()
 
 # 端口自测试
 # subprocess._demo_posix()
@@ -32,7 +33,9 @@ os.chdir(dir)
 active = "clone "
 para = "--bare"
 url = "git@github.com:PythonObject/python_base_subprocess_test_repository.git"
-command = format("" + bash + ' ' + active +' ' + '' + url)
+
+# command = format("" + bash + ' ' + active +' ' + '' + url)
+command = "git log"
 pro = subprocess.Popen(
     args=command,
     shell=True,
@@ -40,9 +43,19 @@ pro = subprocess.Popen(
     stderr=subprocess.PIPE,
     stdout=subprocess.PIPE
 )
+print pro.pid
+
+
+
+# pro.returncode
+# 　　该属性表示子进程的返回状态，returncode可能有多重情况：
+#     None —— 子进程尚未结束；
+#     ==0 —— 子进程正常退出；
+#     > 0—— 子进程异常退出，returncode对应于出错码；
+#     < 0—— 子进程被信号杀掉了。
 
 # poll 用来检查新创建的进程是否结束
-while pro.poll() == None:
+while pro.poll() is None:
     print pro.stdout.readline()
 
 print "return code:"
@@ -51,8 +64,8 @@ print "error:"
 print pro.stderr.readline()
 print "output:"
 print pro.stdout.readline()
-
-# pro.kill()
+print pro.returncode
+# pro.terminate()
 
 
 
